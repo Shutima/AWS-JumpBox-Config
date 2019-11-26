@@ -11,4 +11,5 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
 1. Create VPC using the console
    - **Name Tag**: Optionally provide a name of your VPC
    - **IPv4 CIDR Block**: Specify an IPv4 CIDR block for your VPC (ex., 10.0.0.0/16)
-   ![VPC1](images/VPC1.jpg)
+   ![VPC1](desktop-tutorial/VPC1.jpg)
+   ![VPC2](desktop-tutorial/VPC2.jpg)
