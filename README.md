@@ -20,10 +20,10 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
    - Attach an Internet Gateway to the VPC
      - Open Amazon VPC Console > **Internet Gateways** > **Create internet gateway**
      - Optionally name your Internet Gateway, then choose **Create**
-        ![IGW1](https://github.com/Shutima/desktop-tutorial/blob/master/IGW1.jpg)
+        ![IGW1](https://github.com/Shutima/desktop-tutorial/blob/master/IGW1.png)
      - Choose the Internet Gateway you just created, then choose **Actions** > **Attach to VPC**
      - Select your VPC from the list, then choose **Attach**
-        ![IGW2](https://github.com/Shutima/desktop-tutorial/blob/master/IGW2.jpg)
+        ![IGW2](https://github.com/Shutima/desktop-tutorial/blob/master/IGW2.png)
    - Create a custome Route Table that sends traffic destined outside the VPC to the Internet Gateway, and then associate it with one subnet, making it a public subnet
      - Open Amazon VPC Console > **Route Tables** > **Create Route Table**
      - In the **Create Route Table** dialog box, optionally name your route table, then select your VPC, and then choose **Yes, Create**
@@ -33,21 +33,25 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
        - For IPv6 traffic, specify ::/0 in the **Destination** box, and select the internet gateway ID in the **Target** list.
      - On the **Subnet Associations** tab, choose **Edit**, select **Associate** check box for the subnet, then **Save**
         ![RouteTable1](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable1.jpg)
-        ![RouteTable2](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable2.jpg)
+        ![RouteTable2](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable2.png)
         ![RouteTable3](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable3.jpg)
 2. Create NATSG Security Group. This will need to be specified when launching the NAT Instance.
    - Define the NATSG Security Group in order to enable your NAT instance to receive Internet-bound traffic from instances in a private subnet, as well as SSH traffic from your network. The NAT Instance can also send traffic to the internet, which enables the instances in the private subnet to get software updates.
-   **NATSG: Recommended Rules**
-   **Inbound**
-   Source | Protocol | Port Range | Comments
-   10.0.1.0/24 | TCP | 80 | Allow inbound HTTP traffic from servers in the private subnet
-   10.0.1.0/24 | TCP | 443 | Allow inbound HTTPS traffic from servers in the private subnet
-   Public IP address range of your home network | TCP | 22 | Allow inbound SSH access to the NAT instance from your home network (over the Internet gateway)
 
-   **Outbound**
-   Destination | Protocol | Port Range | Comments
-   0.0.0.0/0 | TCP | 80 | Allow outbound HTTP access to the Internet
-   0.0.0.0/0 | TCP | 443 | Allow outbound HTTPS access to the Internet
+**NATSG: Recommended Rules**
+**Inbound**
+| Source                                       | Protocol | Port Range | Comments                                                                                       |
+|----------------------------------------------|----------|------------|------------------------------------------------------------------------------------------------|
+| 10.0.1.0/24                                  | TCP      | 80         | Allow inbound HTTP traffic from servers in the private subnet                                  |
+| 10.0.1.0/24                                  | TCP      | 443        | Allow inbound HTTPS traffic from servers in the private subnet                                 |
+| Public IP address range of your home network | TCP      | 22         | Allow inbound SSH access to the NAT instance from your home network (over the Internet gateway)|
+
+**Outbound**
+| Destination                                  | Protocol | Port Range | Comments                                                                                       |
+|----------------------------------------------|----------|------------|------------------------------------------------------------------------------------------------|
+| 0.0.0.0/0                                    | TCP      | 80         | Allow outbound HTTP access to the Internet                                                     |
+| 0.0.0.0/0                                    | TCP      | 443        | Allow outbound HTTPS access to the Internet                                                    |
+
    - Open Amazon VPC Console > **Security Groups** > **Create Security Group**
    - In the **Create Security Group** dialog box, specify the NATSG as the name of the security group, and provide description. Select the ID of your VPC from the **VPC** list, then choose **Create**
    - Select the NATSG group that just created. The details pane displays the details for the security group, and tabs for inbound and outbound rules.
