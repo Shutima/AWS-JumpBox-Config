@@ -1,8 +1,3 @@
-# Welcome to GitHub Desktop!
-
-This is your README. READMEs are where you can communicate what your project is and how to use it.
-
-Write your name on line 6, save it, and then head back to GitHub Desktop.
 # The Jump Box Web Server Set up
 ## What is a Jump Box Web Server?
 The Jump Box Web Server is the Web Server that is connected between the Private Database and the NAT Instance. It allows the Private Database to be able to be accessed from public via NAT Instance using Public Subnet and Internet Gateway (IGW). This secure the public access to the private database because the private database stays in the private subnet.
@@ -20,15 +15,15 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
      - **VPC**: Choose the VPC that was created
      - **Availability Zone**: Optionally choose an Availability Zone that your subnet will reside
      - **IPv4 CIDR Block**: Specify an IPv4 CIDR block for your subnet, for example, 10.0.1.0/24 for Public Subnet and 10.0.2.0/24 for Private Subnet
-        ![subnet1](https://github.com/Shutima/desktop-tutorial/blob/version1/subnet1.jpg)
-        ![subnet2](https://github.com/Shutima/desktop-tutorial/blob/version1/subnet2.jpg)
+        ![subnet1](https://github.com/Shutima/desktop-tutorial/blob/master/subnet1.jpg)
+        ![subnet2](https://github.com/Shutima/desktop-tutorial/blob/master/subnet2.jpg)
    - Attach an Internet Gateway to the VPC
      - Open Amazon VPC Console > **Internet Gateways** > **Create internet gateway**
      - Optionally name your Internet Gateway, then choose **Create**
-        ![IGW1](https://github.com/Shutima/desktop-tutorial/blob/version1/IGW1.jpg)
+        ![IGW1](https://github.com/Shutima/desktop-tutorial/blob/master/IGW1.jpg)
      - Choose the Internet Gateway you just created, then choose **Actions** > **Attach to VPC**
      - Select your VPC from the list, then choose **Attach**
-        ![IGW2](https://github.com/Shutima/desktop-tutorial/blob/version1/IGW2.jpg)
+        ![IGW2](https://github.com/Shutima/desktop-tutorial/blob/master/IGW2.jpg)
    - Create a custome Route Table that sends traffic destined outside the VPC to the Internet Gateway, and then associate it with one subnet, making it a public subnet
      - Open Amazon VPC Console > **Route Tables** > **Create Route Table**
      - In the **Create Route Table** dialog box, optionally name your route table, then select your VPC, and then choose **Yes, Create**
@@ -37,9 +32,9 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
        - For IPv4 traffic, specify 0.0.0.0/0 in the **Destination** box, and select the internet gateway ID in the **Target** list.
        - For IPv6 traffic, specify ::/0 in the **Destination** box, and select the internet gateway ID in the **Target** list.
      - On the **Subnet Associations** tab, choose **Edit**, select **Associate** check box for the subnet, then **Save**
-        ![RouteTable1](https://github.com/Shutima/desktop-tutorial/blob/version1/RouteTable1.jpg)
-        ![RouteTable2](https://github.com/Shutima/desktop-tutorial/blob/version1/RouteTable2.jpg)
-        ![RouteTable3](https://github.com/Shutima/desktop-tutorial/blob/version1/RouteTable3.jpg)
+        ![RouteTable1](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable1.jpg)
+        ![RouteTable2](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable2.jpg)
+        ![RouteTable3](https://github.com/Shutima/desktop-tutorial/blob/master/RouteTable3.jpg)
 2. Create NATSG Security Group. This will need to be specified when launching the NAT Instance.
    - Define the NATSG Security Group in order to enable your NAT instance to receive Internet-bound traffic from instances in a private subnet, as well as SSH traffic from your network. The NAT Instance can also send traffic to the internet, which enables the instances in the private subnet to get software updates.
    **NATSG: Recommended Rules**
@@ -67,9 +62,9 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
      b. Choose **Add another rule**, and select **HTTP** from the **Type** list. In the **Destination** field, specify 0.0.0.0/0 
      c. Choose **Add another rule**, and select **HTTPS** from the **Type** list. In the **Destination** field, specify 0.0.0.0/0 
      d. Choose **Save**.
-        ![SG1](https://github.com/Shutima/desktop-tutorial/blob/version1/SG1.jpg)
-        ![SG2](https://github.com/Shutima/desktop-tutorial/blob/version1/SG2.jpg)
-        ![SG3](https://github.com/Shutima/desktop-tutorial/blob/version1/SG3.jpg)
+        ![SG1](https://github.com/Shutima/desktop-tutorial/blob/master/SG1.jpg)
+        ![SG2](https://github.com/Shutima/desktop-tutorial/blob/master/SG2.jpg)
+        ![SG3](https://github.com/Shutima/desktop-tutorial/blob/master/SG3.jpg)
 
 3. Launch an instance into your public subnet from an AMI that is configured to run a NAT instance.
    a. Open Amazon E2 Console
@@ -78,15 +73,15 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
       - On **Configure Instance Details** page, select the VPC created from **Network** list, and select your Public Subnet from **Subnet** list
       - On **Configure Security Group** page, select the **Select an existing security group** option, and select the NATSG Security Group that you just created > **Review and Launch**
       - Review the configure and **Launch**
-        ![NATinstance](https://github.com/Shutima/desktop-tutorial/blob/version1/NATinstance.jpg)
-        ![NATinstance2](https://github.com/Shutima/desktop-tutorial/blob/version1/NATinstance2.jpg)
-        ![NATinstance3](https://github.com/Shutima/desktop-tutorial/blob/version1/NATinstance3.jpg)
+        ![NATinstance](https://github.com/Shutima/desktop-tutorial/blob/master/NATinstance.jpg)
+        ![NATinstance2](https://github.com/Shutima/desktop-tutorial/blob/master/NATinstance2.jpg)
+        ![NATinstance3](https://github.com/Shutima/desktop-tutorial/blob/master/NATinstance3.jpg)
 4. Disable the SrcDestCheck attribute for the NAT instance 
    - Open Amazon E2 Console > **Instances**
    - Select NAT Instance, choose **Actions, Networking, Change Source/Dest. Check**.
    - For the NAT Instance, verify that this attribute is disabled. Otherwise, choose **Yes, Disable**.
-        ![NATins_Change1](https://github.com/Shutima/desktop-tutorial/blob/version1/NATins_Change1.jpg)
-        ![NATins_Change2](https://github.com/Shutima/desktop-tutorial/blob/version1/NATins_Change2.jpg)
+        ![NATins_Change1](https://github.com/Shutima/desktop-tutorial/blob/master/NATins_Change1.jpg)
+        ![NATins_Change2](https://github.com/Shutima/desktop-tutorial/blob/master/NATins_Change2.jpg)
 5. If you forgot to assign the public IP address to your NAT Instance during launch (step 3), you need to associate an Elastic IP address with it
    - Open Amazon VPC Console > **Elastic IPs** > **Allocate new address**
    - Choose **Allocate**
@@ -97,21 +92,21 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
    - Select the main route table, the one that lable **Main** is **Yes**. The details pane displays tabs for routes, associations and route propagation.
    - On the **Routes** tab > **Edit**, specify 0.0.0.0/0 in the **Destination** box, select the instance ID of the NAT instance from **Target** list > **Save**
    - On the **Subnet Association** tab > **Edit** > **Associate** check box for the subnet > **Save**
-        ![MainRT1](https://github.com/Shutima/desktop-tutorial/blob/version1/mainRT1.jpg)
-        ![MainRT2](https://github.com/Shutima/desktop-tutorial/blob/version1/mainRT2.jpg)
-        ![MainRT3](https://github.com/Shutima/desktop-tutorial/blob/version1/mainRT3.jpg)
-        ![MainRT4](https://github.com/Shutima/desktop-tutorial/blob/version1/mainRT4.jpg)
+        ![MainRT1](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT1.jpg)
+        ![MainRT2](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT2.jpg)
+        ![MainRT3](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT3.jpg)
+        ![MainRT4](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT4.jpg)
 7. Create a Jump Box Web Server instance
    - Open Amazon EC2 Console > **Launch Instance**
    - On the **Configure Instance Details** page, choose the created VPC, **Public Subnet** on the same VPC, and **Enable** for **Auto-assign Public IP**
    - Add Tags, for example "Jump Box Web Server"
    - On the **Configure Security Group**, choose existing security group that was created (NATSG_Shutima) > **Review and Launch**
-        ![JumpBoxIn1](https://github.com/Shutima/desktop-tutorial/blob/version1/JumpBoxIn1.jpg)
-        ![JumpBoxIn2](https://github.com/Shutima/desktop-tutorial/blob/version1/JumpBoxIn2.jpg)
-        ![JumpBoxIn3](https://github.com/Shutima/desktop-tutorial/blob/version1/JumpBoxIn3.jpg)
+        ![JumpBoxIn1](https://github.com/Shutima/desktop-tutorial/blob/master/JumpBoxIn1.jpg)
+        ![JumpBoxIn2](https://github.com/Shutima/desktop-tutorial/blob/master/JumpBoxIn2.jpg)
+        ![JumpBoxIn3](https://github.com/Shutima/desktop-tutorial/blob/master/JumpBoxIn3.jpg)
 8. Create a third instance for Private Database. Follow the steps from 7) but this time, need to specify as followed (same VPC, Public subnet, disable **Auto-assign Public IP**)
-        ![PrivateDB](https://github.com/Shutima/desktop-tutorial/blob/version1/PrivateDB.jpg)
-        ![PrivateDB2](https://github.com/Shutima/desktop-tutorial/blob/version1/PrivateDB2.jpg)
+        ![PrivateDB](https://github.com/Shutima/desktop-tutorial/blob/master/PrivateDB.jpg)
+        ![PrivateDB2](https://github.com/Shutima/desktop-tutorial/blob/master/PrivateDB2.jpg)
 9. As soon as all the three instances are configured, you can connect to each instance as per following commands, make sure you go into the directory where the permission key *.pem is located:
    - Connet to NAT Instance
    >ssh -i "Shutima_A19_KeyPair.pem" ec2-user@18.207.153.244
