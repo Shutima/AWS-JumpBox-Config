@@ -41,7 +41,7 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
 **NATSG: Recommended Rules**
 **Inbound**
 | Source                                       | Protocol | Port Range | Comments                                                                                       |
-|----------------------------------------------|----------|------------|------------------------------------------------------------------------------------------------|
+|:---------------------------------------------|:---------|:-----------|:-----------------------------------------------------------------------------------------------|
 | 10.0.1.0/24                                  | TCP      | 80         | Allow inbound HTTP traffic from servers in the private subnet                                  |
 | 10.0.1.0/24                                  | TCP      | 443        | Allow inbound HTTPS traffic from servers in the private subnet                                 |
 | Public IP address range of your home network | TCP      | 22         | Allow inbound SSH access to the NAT instance from your home network (over the Internet gateway)|
