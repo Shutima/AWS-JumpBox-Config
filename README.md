@@ -67,7 +67,7 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
      c. Choose **Add another rule**, and select **HTTPS** from the **Type** list. In the **Destination** field, specify 0.0.0.0/0 
      d. Choose **Save**.
         ![SG1](https://github.com/Shutima/desktop-tutorial/blob/master/SG1.jpg)
-        ![SG2](https://github.com/Shutima/desktop-tutorial/blob/master/SG2.jpg)
+        ![SG2](https://user-images.githubusercontent.com/57285863/69805493-0eb0c100-11e1-11ea-8178-41f3ee5287e3.jpg)
         ![SG3](https://github.com/Shutima/desktop-tutorial/blob/master/SG3.jpg)
 
 3. Launch an instance into your public subnet from an AMI that is configured to run a NAT instance.
@@ -100,6 +100,14 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
         ![MainRT2](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT2.jpg)
         ![MainRT3](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT3.jpg)
         ![MainRT4](https://github.com/Shutima/desktop-tutorial/blob/master/mainRT4.jpg)
+7. Adding the rule in the Security Group to allow pinging between instances
+   - On Amazon VPC Console > Security Groups
+   - Select the Security Group that was created in the previous step
+   - On the Inbound Rules tab, add **All ICMP - IPv4** with **Source** the VPC range that you created
+        ![AllowPing](https://github.com/Shutima/desktop-tutorial/blob/master/allowping.jpg)
+
+
+
 7. Create a Jump Box Web Server instance
    - Open Amazon EC2 Console > **Launch Instance**
    - On the **Configure Instance Details** page, choose the created VPC, **Public Subnet** on the same VPC, and **Enable** for **Auto-assign Public IP**
@@ -111,12 +119,14 @@ The Jump Box Web Server is the Web Server that is connected between the Private 
 8. Create a third instance for Private Database. Follow the steps from 7) but this time, need to specify as followed (same VPC, Public subnet, disable **Auto-assign Public IP**)
         ![PrivateDB](https://github.com/Shutima/desktop-tutorial/blob/master/PrivateDB.jpg)
         ![PrivateDB2](https://github.com/Shutima/desktop-tutorial/blob/master/PrivateDB2.jpg)
-9. As soon as all the three instances are configured, you can connect to each instance as per following commands, make sure you go into the directory where the permission key *.pem is located:
+9. As soon as all the three instances are configured, you can connect to each instance as per following commands, make sure you go into the directory where the permission key *.pem is located. Normally, you should NOT be able to connect into the Private DB instance from your PC.
    - Connet to NAT Instance
    >ssh -i "Shutima_A19_KeyPair.pem" ec2-user@18.207.153.244
    - Connect to Jump Box Web Server
    >ssh -i "Shutima_A19_KeyPair.pem" ec2-user@34.207.220.24
    - Connect to Private Database
    >ssh -i "Shutima_A19_KeyPair.pem" ec2-user@10.0.2.4
-10. Test all of the instances
+10. Test that the Jump Box Web Server works as followed:
+   - Connect into the Jump Box Web Server instance from your PC using the above command from previous step
+   - 
 
